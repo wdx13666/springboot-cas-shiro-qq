@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/login" method="post" class="">
+    <fieldset>
+        <ul>
+            <li class="frame_style form_error"><label class="user_icon"></label>
+                <input name="username" type="text" id="username"/><i>用户名</i>
+            </li>
+            <li class="frame_style form_error"><label class="password_icon"></label>
+                <input name="password" type="password" id="userpwd"/><i>密码</i>
+            </li>
+            <li class="frame_style form_error"><label class="Codes_icon"></label>
+                <input name="验证码" type="text" id="Codes_text"/><i>验证码</i>
+                <div class="Codes_region"></div>
+            </li>
+
+        </ul>
+        <div class="space"></div>
+        <div class="clearfix">
+            <label class="inline">
+                <input type="checkbox" class="ace">
+                <span class="lbl">保存密码</span>
+            </label>
+            <button type="submit" class="width-35 pull-right btn btn-sm btn-primary" id="login_btn">
+                <i class="icon-key"></i>
+                登录
+            </button>
+            <a href="/login/qq">qq登录</a>
+        </div>
+
+        <div class="space-4"></div>
+    </fieldset>
+</form>
+</body>
+</html>

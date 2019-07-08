@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdx.flyleg.mapper.SysUserMapper">
+
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+
+    <resultMap id="userAndRole" type="com.wdx.flyleg.pojo.SysUser">
+        <id property="userId" column="user_id"></id>
+        <result property="userName" column="user_name"></result>
+        <collection property="sysRoles" ofType="com.wdx.flyleg.pojo.SysRole">
+            <id property="roleId" column="role_id"></id>
+            <result property="roleName" column="role_name"></result>
+        </collection>
+    </resultMap>
+
+    <!--<select id="selectUserAndRoleById" resultMap="userAndRole">
+        select * from sf_sys_user su , sf_sys_role sr , sf_sys_user_role sur where su.user_id = sur.user_id and sr.role_id = sur.role_id and su.user_id = #{id}
+    </select>-->
+
+    <select id="selectByRoleId" resultType="com.wdx.flyleg.pojo.SysUser">
+        select * from sf_sys_user_role sur, sf_sys_user su where sur.user_id = su.user_id and sur.role_id = #{roleId}
+    </select>
+
+</mapper>

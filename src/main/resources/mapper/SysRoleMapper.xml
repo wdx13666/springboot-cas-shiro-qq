@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdx.flyleg.mapper.SysRoleMapper" >
+    <!-- 开启二级缓存 -->
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>-->
+    <resultMap type="com.wdx.flyleg.pojo.SysRole" id="rolePermission">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <collection property="permissions" ofType="com.wdx.flyleg.pojo.SysPermission">
+            <id column="id" property="id"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="res_name" property="resName"/>
+            <result column="res_type" property="resType"/>
+            <result column="permission" property="permission"/>
+            <result column="url" property="url"/>
+        </collection>
+    </resultMap>
+
+    <resultMap type="com.wdx.flyleg.pojo.SysRole" id="userRole">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <collection property="sysUsers" select="com.wdx.flyleg.mapper.SysUserMapper.selectByRoleId" column="role_id"></collection>
+    </resultMap>
+
+    <select id="getSysRole" resultMap="rolePermission">
+        SELECT sr.role_name,sp.* FROM sf_sys_role_permission AS rp,sf_sys_role AS sr , sf_sys_permission AS sp where
+        sr.role_id = rp.role_id
+        AND sp.id = rp.permission_id and sr.role_id = #{id}
+    </select>
+
+    <select id="selectByRoleId" resultMap="userRole">
+        select  * from sf_sys_role where role_id = #{id}
+    </select>
+
+</mapper>
