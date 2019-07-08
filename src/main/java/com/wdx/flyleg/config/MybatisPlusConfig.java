@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.smallflyingleg.mapper")
+@MapperScan("com.wdx.flyleg.mapper")
 public class MybatisPlusConfig {
 
     /**
